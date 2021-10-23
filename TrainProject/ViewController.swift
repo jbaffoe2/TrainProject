@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController
 {
+    var fromArray:[String] = []
 
     override func viewDidLoad()
     {
@@ -23,26 +24,28 @@ class ViewController: UIViewController
         if let url = URL(string: urlString)
         {
             URLSession.shared.dataTask(with: url) { data, response, error in
-                if let err = error
-                {
-                    print(err)
-                    return
+                if let data = data {
+                    if let json = try? JSONSerialization.jsonObject(with: data) as? NSDictionary{
+                        for item in json {
+                            if let data = item.value as? NSDictionary{
+                                if let from = data["from"] as? String {
+//                                    print(from)
+                                    self.fromArray.append(from)
+                                }
+                            }
+                        }
+                    }
                 }
-
-                do
-                {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [[String: Any]]
-                }catch let jsonError
-                {
-                    print(jsonError)
-                }
-
+                print(self.fromArray)
             }.resume()
             
             
         }
+        
     }
     
  
 
 }
+
+
