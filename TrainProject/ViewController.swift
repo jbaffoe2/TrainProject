@@ -32,11 +32,17 @@ class ViewController: UIViewController
 //                                    print(from)
                                     self.fromArray.append(from)
                                 }
+                                
                             }
                         }
                     }
                 }
                 print(self.fromArray)
+                DispatchQueue.main.async {
+                    
+                    //Display data on table view or labels here
+                    self.view.endEditing(true)
+                }
             }.resume()
             
             
