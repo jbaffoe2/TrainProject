@@ -17,6 +17,7 @@ class ViewController: UIViewController
         // Do any additional setup after loading the view.
     }
 
+    //Tap Button to Run JSON Serialization.
     @IBAction func myButton(_ sender: UIButton)
     {
         let urlString = "https://tsimobile.viarail.ca/data/allData.json"
